@@ -1,0 +1,34 @@
+node_modules/
+
+# Python / JS cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.next/
+dist/
+build/
+
+# Local/editor state
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+
+# Generated working artifacts
+hatch-pet-runs/
+outputs/**/source/
+outputs/**/tmp/
+outputs/download_test/
+*.log
+
+# Screenshot scratch files from local QA
+powerbi_*.png
+*_opened.png
+*_verify.png
+page*.png
