@@ -1,0 +1,33 @@
+name: Repo Health
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check for oversized files
+        shell: bash
+        run: |
+          set -euo pipefail
+          oversized="$(find . -type f -size +95M -not -path './.git/*' -print)"
+          if [ -n "$oversized" ]; then
+            echo "Files larger than 95MB found:"
+            echo "$oversized"
+            exit 1
+          fi
+
+      - name: Show repository summary
+        shell: bash
+        run: |
+          echo "Tracked files: $(git ls-files | wc -l)"
+          echo "Top-level entries:"
+          find . -maxdepth 2 -not -path './.git*' -print | sort | head -120
